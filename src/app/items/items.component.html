@@ -1,0 +1,8 @@
+<a routerLink="/new">Insert new item</a>
+
+<h2>Items</h2>
+<ul>
+  <li *ngFor="let item of items">
+    <a routerLink="/item/{{item.payload.doc.id}}">[{{item.payload.doc.data().genre}}] {{item.payload.doc.data().title}} ({{item.payload.doc.data().score}}/10)</a>
+  </li>
+</ul>

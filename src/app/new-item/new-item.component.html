@@ -1,0 +1,20 @@
+<h2>Insert new series/movie</h2>
+
+<div>
+<p>Title:</p>
+    <input #title class="title">
+</div>
+<div>
+<p>Description:</p>
+    <textarea cols=50 rows=4 #description class="description"></textarea>
+</div>
+<div>
+<p>Score:</p>
+    <input size=2 min=0 max=10 #score type="number" class="score">
+</div>
+<div>
+<p>Genre:</p>
+  <input #genre class="genre">
+</div>
+<button (click)="saveItem(title.value, description.value, score.value, genre.value)">Save</button>
+
