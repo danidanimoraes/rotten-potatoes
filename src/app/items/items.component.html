@@ -1,8 +1,19 @@
 <a routerLink="/new">Insert new item</a>
 
 <h2>Items</h2>
-<ul>
-  <li *ngFor="let item of items">
-    <a routerLink="/item/{{item.payload.doc.id}}">[{{item.payload.doc.data().genre}}] {{item.payload.doc.data().title}} ({{item.payload.doc.data().score}}/10)</a>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let item of items" [ngStyle]="this.getURLStyle(item.payload.doc.id)">
+    <div class="bg">
+      <div><span class="badge badge-info">{{item.payload.doc.data().genre}}</span></div>
+      <a routerLink="/item/{{item.payload.doc.id}}">
+        <p class="title">{{item.payload.doc.data().title | uppercase}}</p>
+      </a>
+      <span class="score badge badge-dark"
+      [class.green]="item.payload.doc.data().score >= 5"
+      [class.red]="item.payload.doc.data().score < 5">
+        ({{item.payload.doc.data().score}}/10)
+      </span>
+    </div>
   </li>
+
 </ul>

@@ -1,1 +1,6 @@
-<h2>{{item.title}}</h2>
+<div *ngIf="item">
+    <h2>{{item.title}}</h2>
+    <p>{{item.genre}}</p>
+    <p>{{item.description}}</p>
+    <p>Score: {{item.score}}/10</p>
+</div>

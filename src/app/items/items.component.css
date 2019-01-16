@@ -1,0 +1,27 @@
+p.title
+{
+    font-size: 1.7em;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', sans-serif;
+    color: rgb(136, 183, 230);
+    text-shadow: 0 0 17px rgb(8, 105, 24), 0 0 6px rgb(2, 2, 2);
+}
+
+.score
+{
+    font-size: 0.85em;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    box-shadow: 0 0 30px rgb(8, 105, 24)
+}
+
+.green
+{
+    color: rgb(84, 204, 148);
+}
+
+.red
+{
+    color: rgb(240, 76, 35);
+}
+

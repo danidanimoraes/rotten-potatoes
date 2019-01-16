@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Item } from '../item';
+import { ActivatedRoute } from '@angular/router';
+import { FirebaseService } from '../firebase.service';
 
 @Component({
   selector: 'app-item-detail',
@@ -9,11 +11,19 @@ import { Item } from '../item';
 export class ItemDetailComponent implements OnInit {
 
   @Input()
-  item: Item;
+  item: any;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private firebaseService: FirebaseService
+  ) { }
 
-  ngOnInit() {
+  ngOnInit()
+  {
+    const id: string  = this.route.snapshot.paramMap.get('id');
+    this.firebaseService
+      .getItem(id)
+      .subscribe((item) => this.item = item.data());
   }
 
 }

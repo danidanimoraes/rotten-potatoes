@@ -6,4 +6,5 @@ export class Item
     description: string;
     score: number;
     genre: Genre;
+    image: string;
 }
