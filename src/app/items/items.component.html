@@ -1,6 +1,9 @@
-<a routerLink="/new">Insert new item</a>
+<div class="home-header">
+<button type="button" class="btn btn-success"><a routerLink="/new">Insert new item</a></button>
 
-<h2>Items</h2>
+<h2>Rotten Potatoes</h2>
+</div>
+<br><br>
 <ul class="list-group">
   <li class="list-group-item" *ngFor="let item of items" [ngStyle]="this.getURLStyle(item.payload.doc.id)">
     <div class="bg">

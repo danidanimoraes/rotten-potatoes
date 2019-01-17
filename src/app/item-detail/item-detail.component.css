@@ -1,0 +1,52 @@
+html
+{
+    margin: 0px;
+    min-height: 100vh;
+    width: 100%;
+}
+ 
+ body
+{
+    margin: 0px;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.title
+{
+    font-size: 7em;
+    font-weight: bold;
+    font-family: 'Georgia', sans-serif;
+    color: rgb(136, 183, 230);
+    text-shadow: 1px 0px 0 black, 0px 1px 0 black, -1px 0px 0 black, 0px -1px 0 black,
+    2px 0px 0 black, 0px 2px 0 black, -2px 0px 0 black, 0px -2px 0 black;
+}
+
+.badge
+{
+    font-size: 1em;
+}
+
+.description
+{
+    font-size: 1.2em;
+    color: black;
+    font-weight: bolder;
+}
+
+div.description
+{
+    background-color: white;
+    opacity: 0.6;
+    width: 30vw;
+}
+
+.green
+{
+    color: rgb(84, 204, 148);
+}
+
+.red
+{
+    color: rgb(240, 76, 35);
+}

@@ -1,6 +1,15 @@
-<div *ngIf="item">
-    <h2>{{item.title}}</h2>
-    <p>{{item.genre}}</p>
-    <p>{{item.description}}</p>
-    <p>Score: {{item.score}}/10</p>
+<body *ngIf="item" [ngStyle]="this.getImageURL()">
+<button class="btn btn-light" (click)="this.goBack()">Back</button>
+  <div>
+    <h2 class="title">{{item.title | uppercase}}</h2> 
+    <div><span class="badge badge-info">{{item.genre}}</span>
+    <span class="score badge badge-dark"
+      [class.green]="item.score >= 5"
+      [class.red]="item.score < 5">
+        ({{item.score}}/10)
+    </span>
+    </div>
+    <br><br>
+    <div class="description"><p class="description">{{item.description}}</p></div>
 </div>
+</body>
