@@ -6,6 +6,7 @@
 <br><br>
 <ul class="list-group">
   <li class="list-group-item" *ngFor="let item of items" [ngStyle]="this.getURLStyle(item.payload.doc.id)">
+    <button type="button" class="btn btn-danger" (click)="deleteItem(item)">Delete</button>
     <div class="bg">
       <div><span class="badge badge-info">{{item.payload.doc.data().genre}}</span></div>
       <a routerLink="/item/{{item.payload.doc.id}}">

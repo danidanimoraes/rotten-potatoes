@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '../firebase.service';
 import { AngularFireStorage } from '@angular/fire/storage/storage';
 import { Location } from '@angular/common';
+import { Item } from '../item';
 
 @Component({
   selector: 'app-item-detail',
@@ -12,7 +13,11 @@ import { Location } from '@angular/common';
 export class ItemDetailComponent implements OnInit {
 
   @Input()
-  item: any;
+  item: Item;
+
+  private id: string;
+  public editMode: boolean = false;
+  private selectedFile: File;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,11 +28,16 @@ export class ItemDetailComponent implements OnInit {
 
   ngOnInit()
   {
-    const id: string  = this.route.snapshot.paramMap.get('id');
+    this.id  = this.route.snapshot.paramMap.get('id');
+    this.getItem(this.id);
+  }
+
+  private getItem(id: string)
+  {
     this.firebaseService
-      .getItem(id)
+      .getItem(this.id)
       .subscribe((item) => {
-        this.item = item.data();
+        this.item = item.data() as Item;
         const imageLink: string[] = this.item.image.split('/');
         this.storage.ref(imageLink[0]).child(imageLink[1]).getDownloadURL().subscribe((url: string) => this.item.image = url);
       });
@@ -48,5 +58,28 @@ export class ItemDetailComponent implements OnInit {
   public goBack(): void
   {
     this.location.back();
+  }
+
+  public deleteItem()
+  {
+    this.firebaseService.deleteItem(this.id).then(() => this.goBack())
+  }
+
+  public detectFiles(event)
+  {
+    this.selectedFile = event.target.files[0];
+  }
+
+  public uploadItem(title: string, description: string, score: number, genre: string)
+  {
+    const uploadedTitle = title && title != this.item.title ? title : this.item.title;
+    const uploadedDescription = description && description != this.item.description ? description : this.item.description;
+    const uploadedScore = score && score != this.item.score ? score : this.item.score;
+    const uploadedGenre = genre && genre != this.item.genre ? genre : this.item.genre;
+    const uploadedImage = this.selectedFile;
+
+    this.firebaseService.uploadItem(this.id, uploadedTitle, uploadedDescription, uploadedScore, uploadedGenre, uploadedImage);
+    this.editMode = false;
+    this.getItem(this.id);
   }
 }

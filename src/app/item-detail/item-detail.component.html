@@ -1,6 +1,11 @@
 <body *ngIf="item" [ngStyle]="this.getImageURL()">
+<div style="width: 60vw">
 <button class="btn btn-light" (click)="this.goBack()">Back</button>
-  <div>
+<button class="btn btn-warning" style="float: right" (click)="this.editMode=true">Edit</button>
+<br>
+<button class="btn btn-secondary" style="float: right" (click)="this.editMode=false">Cancel</button>
+</div>
+  <div *ngIf="!editMode; else edit">
     <h2 class="title">{{item.title | uppercase}}</h2> 
     <div><span class="badge badge-info">{{item.genre}}</span>
     <span class="score badge badge-dark"
@@ -8,8 +13,38 @@
       [class.red]="item.score < 5">
         ({{item.score}}/10)
     </span>
+    <button type="button" class="btn btn-danger" style="float: right" (click)="deleteItem()">Delete</button>
     </div>
     <br><br>
     <div class="description"><p class="description">{{item.description}}</p></div>
-</div>
+  </div>
+  <ng-template #edit>
+    <br>
+    <div class="edit">
+    <h3>Please edit the fields you want to update:</h3>
+    <div>
+    <p>Title:</p>
+        <input #title>
+    </div>
+    <div>
+    <p>Description:</p>
+        <textarea cols=50 rows=4 #description></textarea>
+    </div>
+    <div>
+    <p>Score:</p>
+        <input size=2 min=0 max=10 #score type="number">
+    </div>
+    <div>
+    <p>Genre:</p>
+        <input #genre>
+    </div>
+    <div>
+    <p>Image:</p>
+        <input type="file" #image (change)="detectFiles($event)" accept=".png,.jpg,.jpeg">
+    </div>
+    
+    <br>
+    <button (click)="uploadItem(title.value, description.value, score.value, genre.value)">Save</button>
+    </div>
+  </ng-template>
 </body>

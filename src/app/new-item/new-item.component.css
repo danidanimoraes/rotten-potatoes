@@ -1,21 +1,26 @@
-.dropzone { 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column; 
-    height: 300px;
-    border: 2px dashed #f16624;
-    border-radius: 5px;
-    background: white;
-    margin: 10px 0;
-
+body
+{
+    margin: 0px;
+    min-height: 100vh;
+    width: 100%;
+    background-image: url("../../assets/rotten-potatoes.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.hovering {
-    border: 2px solid #f16624;
-    color: #dadada !important;
+h2
+{
+    font-size: 2.3em;
+    font-family: 'Geneva' sans-serif;
+    color: greenyellow;
+    text-shadow: 3px 0px 3px black, 0px 3px 3px black, -3px 0px 3px black, 0px -3px 3px black;
 }
 
-progress::-webkit-progress-value {
-    transition: width 0.1s ease;
+p
+{
+    font-size: 1.2em;
+    font-family: 'Trebuchet MS' sans-serif;
+    color: greenyellow;
+    text-shadow: 3px 0px 3px black, 0px 3px 3px black, -3px 0px 3px black, 0px -3px 3px black;
 }

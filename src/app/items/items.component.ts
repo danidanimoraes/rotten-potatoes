@@ -30,16 +30,16 @@ export class ItemsComponent implements OnInit {
   {
     this.firebaseService
       .getAllItems()
-      .subscribe((result) => result.map((a: DocumentChangeAction<Item>) => 
+      .subscribe((result) => result.map((item: DocumentChangeAction<Item>) => 
       {
         this.items = result;
-        if(!a.payload.doc.data().image)
+        if(!item.payload.doc.data().image)
         {
-          this.storage.ref('series-and-movies').child('nosignal.jpg').getDownloadURL().subscribe((url: string) => this.images.set(a.payload.doc.id, url));
+          this.storage.ref('series-and-movies').child('nosignal.jpg').getDownloadURL().subscribe((url: string) => this.images.set(item.payload.doc.id, url));
           return;
         }
-        const imageLink: string[] = a.payload.doc.data().image.split('/');
-        this.storage.ref(imageLink[0]).child(imageLink[1]).getDownloadURL().subscribe((url: string) => this.images.set(a.payload.doc.id, url));
+        const imageLink: string[] = item.payload.doc.data().image.split('/');
+        this.storage.ref(imageLink[0]).child(imageLink[1]).getDownloadURL().subscribe((url: string) => this.images.set(item.payload.doc.id, url));
         return;
       }));
   }
@@ -56,5 +56,10 @@ export class ItemsComponent implements OnInit {
         "background-size" : "cover"
       };
     }
+  }
+
+  public deleteItem(item)
+  {
+    this.firebaseService.deleteItem(item);
   }
 }

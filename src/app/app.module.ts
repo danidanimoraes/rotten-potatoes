@@ -12,6 +12,7 @@ import { ItemsComponent } from './items/items.component';
 import { FirebaseService } from './firebase.service';
 import { NewItemComponent } from './new-item/new-item.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ItemDetailComponent } from './item-detail/item-detail.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AppRoutingModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    CommonModule
   ],
   providers: [FirebaseService],
   bootstrap: [AppComponent]

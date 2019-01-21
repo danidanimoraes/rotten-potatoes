@@ -10,18 +10,54 @@ export class FirebaseService {
     private storage: AngularFireStorage
   ) { }
 
-  public createItem(title, description, score, genre)
+  public createItem(title: string, description: string, score: number, genre: string, imageFile: File)
   {
+    const image: string = `series-and-movies/${title.toLowerCase().replace(/\s/g,'')}.${imageFile.type.split('/')[1]}`;
+
+    this.storage.upload(image, imageFile).then(() => {
+      return this.db
+        .collection('items')
+        .add(
+          {
+            title,
+            description,
+            score,
+            genre,
+            image
+          }
+        )
+    });
+  }
+
+  public uploadItem(id: string, title: string, description: string, score: number, genre: string, imageFile: File)
+  {
+    if(imageFile)
+    {
+      const image: string = `series-and-movies/${title.toLowerCase().replace(/\s/g,'')}.${imageFile.type.split('/')[1]}`;
+      this.storage.ref(image).delete();
+      this.storage.upload(image, imageFile).then(() => {
+        return this.db
+          .collection('items')
+          .doc(`${id}`)
+          .update({
+            title,
+            description,
+            score,
+            genre,
+            image
+          });
+      });
+    }
+
     return this.db
-      .collection('items')
-      .add(
-        {
+        .collection('items')
+        .doc(`${id}`)
+        .update({
           title,
           description,
           score,
           genre
-        }
-      )
+        });
   }
 
   public getAllItems()
@@ -39,8 +75,19 @@ export class FirebaseService {
       .get();
   }
 
-  public getImagesFromStorage()
+  public deleteItem(item)
   {
-    
+    this.storage.ref(item.payload.doc.data().image).delete();
+    return this.db
+      .collection('items')
+      .doc(`${item.payload.doc.id}`)
+      .delete();
+  }
+
+  public updateItem(item)
+  {
+    this.db
+      .collection(`items`)
+      .doc(`${item}`)
   }
 }

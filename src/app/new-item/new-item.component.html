@@ -1,4 +1,5 @@
 <body>
+<button class="btn btn-light" (click)="this.goBack()">Back</button>
 <h2>Insert new series/movie</h2>
 
 <div>
@@ -17,6 +18,11 @@
 <p>Genre:</p>
   <input #genre class="genre">
 </div>
+<div>
+<p>Image:</p>
+    <input type="file" #image class="image" (change)="detectFiles($event)" accept=".png,.jpg,.jpeg">
+</div>
 
+<br>
 <button (click)="saveItem(title.value, description.value, score.value, genre.value)">Save</button>
 </body>

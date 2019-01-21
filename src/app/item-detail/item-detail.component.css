@@ -5,12 +5,18 @@ html
     width: 100%;
 }
  
- body
+body
 {
     margin: 0px;
     min-height: 100vh;
     width: 100%;
 }
+
+div
+{
+    width: 60vw;
+}
+
 
 .title
 {
@@ -38,7 +44,7 @@ div.description
 {
     background-color: white;
     opacity: 0.6;
-    width: 30vw;
+    width: 45vw;
 }
 
 .green
@@ -49,4 +55,20 @@ div.description
 .red
 {
     color: rgb(240, 76, 35);
+}
+
+.edit
+{
+    font-size: 1.2em;
+    font-family: 'Trebuchet MS' sans-serif;
+    color: greenyellow;
+    text-shadow: 3px 0px 3px black, 0px 3px 3px black, -3px 0px 3px black, 0px -3px 3px black;
+}
+
+h3
+{
+    font-size: 1.5em;
+    font-family: 'Trebuchet MS' sans-serif;
+    color: greenyellow;
+    text-shadow: 3px 0px 3px black, 0px 3px 3px black, -3px 0px 3px black, 0px -3px 3px black;
 }
