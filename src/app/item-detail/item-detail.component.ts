@@ -4,6 +4,7 @@ import { FirebaseService } from '../firebase.service';
 import { AngularFireStorage } from '@angular/fire/storage/storage';
 import { Location } from '@angular/common';
 import { Item } from '../item';
+import { AuthenticationService } from '../authentitcation.service';
 
 @Component({
   selector: 'app-item-detail',
@@ -24,6 +25,7 @@ export class ItemDetailComponent implements OnInit {
     private firebaseService: FirebaseService,
     private storage: AngularFireStorage,
     private location: Location,
+    private authService: AuthenticationService
   ) { }
 
   ngOnInit()
@@ -77,9 +79,11 @@ export class ItemDetailComponent implements OnInit {
     const uploadedScore = score && score != this.item.score ? score : this.item.score;
     const uploadedGenre = genre && genre != this.item.genre ? genre : this.item.genre;
     const uploadedImage = this.selectedFile;
-
-    this.firebaseService.uploadItem(this.id, uploadedTitle, uploadedDescription, uploadedScore, uploadedGenre, uploadedImage);
-    this.editMode = false;
-    this.getItem(this.id);
+    this.authService.angularFireAuth.authState.subscribe((user) => 
+    {
+      this.firebaseService.uploadItem(this.id, uploadedTitle, uploadedDescription, uploadedScore, uploadedGenre, user.displayName, uploadedImage);
+      this.editMode = false;
+      this.getItem(this.id);
+    });
   }
 }

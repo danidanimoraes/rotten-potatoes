@@ -10,26 +10,44 @@ export class FirebaseService {
     private storage: AngularFireStorage
   ) { }
 
-  public createItem(title: string, description: string, score: number, genre: string, imageFile: File)
+  public createItem(title: string, description: string, score: number, genre: string, user: string, imageFile: File)
   {
-    const image: string = `series-and-movies/${title.toLowerCase().replace(/\s/g,'')}.${imageFile.type.split('/')[1]}`;
+    if(imageFile)
+    {
+      const image: string = `series-and-movies/${title.toLowerCase().replace(/\s/g,'')}.${imageFile.type.split('/')[1]}`;
 
-    this.storage.upload(image, imageFile).then(() => {
-      return this.db
-        .collection('items')
-        .add(
-          {
-            title,
-            description,
-            score,
-            genre,
-            image
-          }
-        )
-    });
+      this.storage.upload(image, imageFile).then(() => {
+        return this.db
+          .collection('items')
+          .add(
+            {
+              title,
+              description,
+              score,
+              genre,
+              user,
+              image
+            }
+          )
+      });
+    }
+
+    const image: string = `series-and-movies/nosignal.jpg`;
+    return this.db
+      .collection('items')
+      .add(
+        {
+          title,
+          description,
+          score,
+          genre,
+          user,
+          image 
+        }
+      )
   }
 
-  public uploadItem(id: string, title: string, description: string, score: number, genre: string, imageFile: File)
+  public uploadItem(id: string, title: string, description: string, score: number, genre: string, user: string, imageFile: File)
   {
     if(imageFile)
     {
@@ -44,9 +62,10 @@ export class FirebaseService {
             description,
             score,
             genre,
+            user,
             image
           });
-      });
+      });      
     }
 
     return this.db
@@ -56,8 +75,9 @@ export class FirebaseService {
           title,
           description,
           score,
-          genre
-        });
+          genre,
+          user
+        });    
   }
 
   public getAllItems()
@@ -77,7 +97,12 @@ export class FirebaseService {
 
   public deleteItem(item)
   {
-    this.storage.ref(item.payload.doc.data().image).delete();
+    console.log(item.payload.doc.data().image)
+    // ver se o nome eh nosignal.jpg
+    if(!(item.payload.doc.data().image as string).includes('nosignal.jpg'))
+    {
+      this.storage.ref(item.payload.doc.data().image).delete();
+    }
     return this.db
       .collection('items')
       .doc(`${item.payload.doc.id}`)

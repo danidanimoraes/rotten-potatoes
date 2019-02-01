@@ -72,3 +72,13 @@ h3
     color: greenyellow;
     text-shadow: 3px 0px 3px black, 0px 3px 3px black, -3px 0px 3px black, 0px -3px 3px black;
 }
+
+.whitebox
+{
+    background-color: white;
+    opacity: 0.4;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0
+}

@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FirebaseService } from '../firebase.service';
 import { Genre } from '../genre';
 import { Observable } from 'rxjs-compat/Observable';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { storage } from 'firebase';
+import { storage, User } from 'firebase';
 import { DocumentChangeAction } from '@angular/fire/firestore';
 import { Item } from '../item';
+import { AuthenticationService } from '../authentitcation.service';
 
 @Component({
   selector: 'app-items',
@@ -14,16 +15,19 @@ import { Item } from '../item';
 })
 export class ItemsComponent implements OnInit {
 
+  user: any = {};
+
   items: Array<any>;
   images: Map<string, string> = new Map<string, string>();
 
   constructor(
     private firebaseService: FirebaseService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    public authService: AuthenticationService
   ) { }
 
   ngOnInit() {
-    this.getAllItems();
+    this.getAllItems(); 
   }
 
   public getAllItems()

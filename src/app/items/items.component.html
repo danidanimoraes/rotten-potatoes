@@ -3,7 +3,7 @@
 
 <h2>Rotten Potatoes</h2>
 </div>
-<br><br>
+<br>
 <ul class="list-group">
   <li class="list-group-item" *ngFor="let item of items" [ngStyle]="this.getURLStyle(item.payload.doc.id)">
     <button type="button" class="btn btn-danger" (click)="deleteItem(item)">Delete</button>
@@ -17,6 +17,9 @@
       [class.red]="item.payload.doc.data().score < 5">
         ({{item.payload.doc.data().score}}/10)
       </span>
+      
+      <!-- <p *ngIf="authService.angularFireAuth.authState | async as user;" class="userName">Included by:<br>{{user.displayName}}</p> -->
+      <p *ngIf="item.payload.doc.data().user" class="userName">Included by:<br>{{item.payload.doc.data().user}}</p>
     </div>
   </li>
 

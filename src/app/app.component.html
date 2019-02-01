@@ -1,3 +1,18 @@
-<router-outlet></router-outlet>
+<html>
+  <div *ngIf="authService.angularFireAuth.authState | async as user; else showLogin" style="background-color: rgb(128, 105, 3)">
+    <p class="p-2" style="color: rgb(56, 46, 1)" id="loginText">
+        <b>Welcome, {{user.displayName}}!</b>
+        <button (click)="logout()" class="btn btn-dark btn-xs float-right" id="logoutButton"><b>Logout</b></button>
+  <div class="content">
+      <router-outlet></router-outlet>
+  </div>
+</div>
+    <ng-template #showLogin>
+        <div class="text-center">
+        <p id="loginMain"><br><br>Welcome to Rotten Potatoes! <br> Please, login.</p>
+        <button (click)="login()" class="btn btn-info" id="loginButton"><b>Login with Google</b></button>
+        </div>
+    </ng-template>
+</html>
 
 

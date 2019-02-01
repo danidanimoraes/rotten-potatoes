@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Observable } from 'rxjs-compat/Observable';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { storage } from 'firebase';
+import { AuthenticationService } from '../authentitcation.service';
 
 @Component({
   selector: 'app-new-item',
@@ -13,10 +14,12 @@ import { storage } from 'firebase';
 export class NewItemComponent implements OnInit {
 
   private selectedFile: File;
+  private hasFile: boolean = false;
 
   constructor(
     private firebaseService: FirebaseService,
     private location: Location,
+    private authService: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -26,13 +29,17 @@ export class NewItemComponent implements OnInit {
   {
     this.selectedFile = event.target.files[0];
     console.log("File:", this.selectedFile.name)
+    this.hasFile = true;
   }
 
   public saveItem(title: string, description: string, score: number, genre: string)
   {
-    console.log(`Saving ${title}:${description} (${score}/10) - ${genre}`)
-    this.firebaseService.createItem(title, description, score, genre, this.selectedFile);
-    this.location.back();
+    const image = this.hasFile ? this.selectedFile : null;
+    this.authService.angularFireAuth.authState.subscribe((user) => {
+      this.firebaseService.createItem(title, description, score, genre, user.displayName, image);
+      this.location.back();
+      this.hasFile = false;
+    });    
   }
 
   public goBack(): void
