@@ -1,0 +1,39 @@
+html
+{
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../assets/rotten-potatoes.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    background-size: cover;
+}
+
+h2
+{
+    font-size: 5em;
+    font-weight: bold;
+    font-family: 'Geneva' sans-serif;
+    color: rgb(209, 144, 23);
+    text-shadow: 3px 0px 3px black, 0px 3px 3px black, -3px 0px 3px black, 0px -3px 3px black;
+}
+
+.description
+{
+    font-size: 1.2em;
+    color: black;
+    font-weight: bolder;
+}
+
+div.description
+{
+    background-color: white;
+    opacity: 0.6;
+    width: 45vw;
+}
+
+img
+{
+    width: 40vw;
+    height: auto; 
+}

@@ -49,10 +49,7 @@ export class AuthenticationService implements CanActivate {
   {
     return this.angularFireAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
     .then(() => {
-      this.angularFireAuth.authState.subscribe((user) => {
-          console.log('aa = ', user)
-          this.authState.emit(user)
-        });
+      this.angularFireAuth.authState.subscribe((user) => this.authState.emit(user));
     });
   }
 

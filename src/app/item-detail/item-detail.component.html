@@ -1,9 +1,10 @@
 <body *ngIf="item" [ngStyle]="this.getImageURL()">
 <div style="width: 60vw">
+<br>
 <button class="btn btn-light" (click)="this.goBack()">Back</button>
 <button class="btn btn-warning" style="float: right" (click)="this.editMode=true">Edit</button>
 <br>
-<button class="btn btn-secondary" style="float: right" (click)="this.editMode=false">Cancel</button>
+<button *ngIf="editMode" class="btn btn-secondary" style="float: right" (click)="this.editMode=false">Cancel</button>
 </div>
   <div *ngIf="!editMode; else edit">
         <h2 class="title">{{item.title | uppercase}}</h2> 
@@ -24,19 +25,19 @@
     <h3>Please edit the fields you want to update:</h3>
     <div>
     <p>Title:</p>
-        <input #title>
+        <input value="{{item.title}}" #title>
     </div>
     <div>
     <p>Description:</p>
-        <textarea cols=50 rows=4 #description></textarea>
+        <textarea value="{{item.description}}" #description></textarea>
     </div>
     <div>
     <p>Score:</p>
-        <input size=2 min=0 max=10 #score type="number">
+        <input size=2 min=0 max=10 value="{{item.score}}" #score type="number">
     </div>
     <div>
     <p>Genre:</p>
-        <input #genre>
+        <input value="{{item.genre}}" #genre>
     </div>
     <div>
     <p>Image:</p>

@@ -16,6 +16,8 @@ import { NewItemComponent } from './new-item/new-item.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from './authentitcation.service';
+import { AboutComponent } from './about/about.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -24,6 +26,8 @@ import { AuthenticationService } from './authentitcation.service';
     ItemsComponent,
     NewItemComponent,
     ItemDetailComponent,
+    AboutComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

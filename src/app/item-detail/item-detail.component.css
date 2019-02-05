@@ -82,3 +82,9 @@ h3
     left: 0;
     top: 0
 }
+
+textarea
+{
+    width: 50%;
+    box-sizing: border-box;
+}

@@ -3,13 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { ItemsComponent } from './items/items.component';
 import { NewItemComponent } from './new-item/new-item.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes =
 [
   { path: '', redirectTo: '/items', pathMatch: 'full'},
   { path: 'new', component: NewItemComponent },
   { path: 'items', component: ItemsComponent },
-  { path: 'item/:id', component: ItemDetailComponent }
+  { path: 'item/:id', component: ItemDetailComponent },
+  { path: 'about', component: AboutComponent}
 ];
 
 @NgModule({

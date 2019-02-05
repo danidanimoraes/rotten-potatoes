@@ -5,7 +5,7 @@ export const environment = {
     authDomain: "watchlist-3d28d.firebaseapp.com",
     databaseURL: "https://watchlist-3d28d.firebaseio.com",
     projectId: "watchlist-3d28d",
-    storageBucket: "",
+    storageBucket: "watchlist-3d28d.appspot.com",
     messagingSenderId: "793666936978"
   }
 };

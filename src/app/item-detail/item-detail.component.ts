@@ -16,6 +16,7 @@ export class ItemDetailComponent implements OnInit {
   @Input()
   item: Item;
 
+  private imageLink: string;
   private id: string;
   public editMode: boolean = false;
   private selectedFile: File;
@@ -40,15 +41,15 @@ export class ItemDetailComponent implements OnInit {
       .getItem(this.id)
       .subscribe((item) => {
         this.item = item.data() as Item;
-        const imageLink: string[] = this.item.image.split('/');
-        this.storage.ref(imageLink[0]).child(imageLink[1]).getDownloadURL().subscribe((url: string) => this.item.image = url);
+        const imageSplit: string[] = this.item.image.split('/');
+        this.storage.ref(imageSplit[0]).child(imageSplit[1]).getDownloadURL().subscribe((url: string) => this.imageLink = url);
       });
   }
 
   public getImageURL()
   {
       return {
-        "background-image" : `url(${this.item.image})`,
+        "background-image" : `url(${this.imageLink})`,
         "background-position": "center",
         "background-repeat": "no-repeat",
         "width": "100%",
@@ -64,7 +65,7 @@ export class ItemDetailComponent implements OnInit {
 
   public deleteItem()
   {
-    this.firebaseService.deleteItem(this.id).then(() => this.goBack())
+    this.firebaseService.deleteItem(this.id, this.item.image).then(() => this.goBack())
   }
 
   public detectFiles(event)
@@ -79,11 +80,9 @@ export class ItemDetailComponent implements OnInit {
     const uploadedScore = score && score != this.item.score ? score : this.item.score;
     const uploadedGenre = genre && genre != this.item.genre ? genre : this.item.genre;
     const uploadedImage = this.selectedFile;
-    this.authService.angularFireAuth.authState.subscribe((user) => 
-    {
-      this.firebaseService.uploadItem(this.id, uploadedTitle, uploadedDescription, uploadedScore, uploadedGenre, user.displayName, uploadedImage);
-      this.editMode = false;
-      this.getItem(this.id);
-    });
+    
+    this.firebaseService.uploadItem(this.id, uploadedTitle, uploadedDescription, uploadedScore, uploadedGenre, this.item.user, uploadedImage);
+    this.editMode = false;
+    this.getItem(this.id);
   }
 }

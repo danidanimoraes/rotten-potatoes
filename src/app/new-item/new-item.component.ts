@@ -28,7 +28,6 @@ export class NewItemComponent implements OnInit {
   public detectFiles(event)
   {
     this.selectedFile = event.target.files[0];
-    console.log("File:", this.selectedFile.name)
     this.hasFile = true;
   }
 

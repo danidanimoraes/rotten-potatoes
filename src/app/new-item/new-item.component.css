@@ -24,3 +24,9 @@ p
     color: greenyellow;
     text-shadow: 3px 0px 3px black, 0px 3px 3px black, -3px 0px 3px black, 0px -3px 3px black;
 }
+
+textarea
+{
+    width: 30%;
+    box-sizing: border-box;
+}

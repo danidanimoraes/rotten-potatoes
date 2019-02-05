@@ -4,6 +4,8 @@
         <b>Welcome, {{user.displayName}}!</b>
         <button (click)="logout()" class="btn btn-dark btn-xs float-right" id="logoutButton"><b>Logout</b></button>
   <div class="content">
+      <app-header></app-header>
+      <br>
       <router-outlet></router-outlet>
   </div>
 </div>

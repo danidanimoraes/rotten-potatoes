@@ -31,20 +31,21 @@ export class FirebaseService {
           )
       });
     }
-
-    const image: string = `series-and-movies/nosignal.jpg`;
-    return this.db
-      .collection('items')
-      .add(
-        {
-          title,
-          description,
-          score,
-          genre,
-          user,
-          image 
-        }
-      )
+    else{
+      const image: string = `series-and-movies/nosignal.jpg`;
+      return this.db
+        .collection('items')
+        .add(
+          {
+            title,
+            description,
+            score,
+            genre,
+            user,
+            image 
+          }
+        )
+    }
   }
 
   public uploadItem(id: string, title: string, description: string, score: number, genre: string, user: string, imageFile: File)
@@ -67,17 +68,18 @@ export class FirebaseService {
           });
       });      
     }
-
-    return this.db
-        .collection('items')
-        .doc(`${id}`)
-        .update({
-          title,
-          description,
-          score,
-          genre,
-          user
-        });    
+    else{
+      return this.db
+      .collection('items')
+      .doc(`${id}`)
+      .update({
+        title,
+        description,
+        score,
+        genre,
+        user
+      });   
+    }
   }
 
   public getAllItems()
@@ -95,17 +97,17 @@ export class FirebaseService {
       .get();
   }
 
-  public deleteItem(item)
+  public deleteItem(id: string, image: string)
   {
-    console.log(item.payload.doc.data().image)
     // ver se o nome eh nosignal.jpg
-    if(!(item.payload.doc.data().image as string).includes('nosignal.jpg'))
+    if(!image.includes('nosignal.jpg'))
     {
-      this.storage.ref(item.payload.doc.data().image).delete();
+      this.storage.ref(image).delete();
     }
+
     return this.db
       .collection('items')
-      .doc(`${item.payload.doc.id}`)
+      .doc(`${id}`)
       .delete();
   }
 

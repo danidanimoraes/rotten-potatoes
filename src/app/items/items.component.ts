@@ -64,6 +64,6 @@ export class ItemsComponent implements OnInit {
 
   public deleteItem(item)
   {
-    this.firebaseService.deleteItem(item);
+    this.firebaseService.deleteItem(item.payload.doc.id, item.payload.doc.data().image);
   }
 }

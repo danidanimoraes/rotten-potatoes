@@ -7,4 +7,5 @@ export class Item
     score: number;
     genre: string;
     image: string;
+    user: string;
 }
