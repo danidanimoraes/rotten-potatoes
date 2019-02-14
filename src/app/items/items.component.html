@@ -6,6 +6,16 @@
 </div>
 <br>
 <ul class="list-group">
+
+  <div>
+      <label style="color: white; font-weight: bold">Order by:</label>
+      <select [(ngModel)]="selectedOrder" (ngModelChange)="onSelectOrder(selectedOrder)">
+          <option *ngFor="let order of orderByOptions" [value]="order" [selected]="selectedOrder.toString() == order">{{order}}</option>
+      </select>
+      <button type="button" class="btn btn-light btn-sm" *ngIf="isReverseOrder" (click)="changeReverse()">▲</button>
+      <button type="button" class="btn btn-light btn-sm" *ngIf="!isReverseOrder" (click)="changeReverse()">▼</button>
+  </div>
+
   <li class="list-group-item" *ngFor="let item of items" [ngStyle]="this.getURLStyle(item.payload.doc.id)">
     <button type="button" class="btn btn-danger" (click)="deleteItem(item)">Delete</button>
     <div class="bg">
@@ -20,7 +30,9 @@
       </span>
       
       <!-- <p *ngIf="authService.angularFireAuth.authState | async as user;" class="userName">Included by:<br>{{user.displayName}}</p> -->
-      <p *ngIf="item.payload.doc.data().user" class="userName">Included by:<br>{{item.payload.doc.data().user}}</p>
+      <p *ngIf="item.payload.doc.data().userIncluded" class="userName">Included by:<br>{{item.payload.doc.data().userIncluded}}</p>
+      <br><br><br>
+      <p *ngIf="item.payload.doc.data().userModified" class="userName">Modified by:<br>{{item.payload.doc.data().userModified}}</p>
     </div>
   </li>
 

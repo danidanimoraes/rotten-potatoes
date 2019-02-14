@@ -81,8 +81,10 @@ export class ItemDetailComponent implements OnInit {
     const uploadedGenre = genre && genre != this.item.genre ? genre : this.item.genre;
     const uploadedImage = this.selectedFile;
     
-    this.firebaseService.uploadItem(this.id, uploadedTitle, uploadedDescription, uploadedScore, uploadedGenre, this.item.user, uploadedImage);
-    this.editMode = false;
-    this.getItem(this.id);
+    this.authService.angularFireAuth.authState.subscribe((user) => {
+      this.firebaseService.uploadItem(this.id, uploadedTitle, uploadedDescription, uploadedScore, uploadedGenre, this.item.userIncluded, user.displayName, uploadedImage);
+      this.editMode = false;
+      this.getItem(this.id);
+    });    
   }
 }

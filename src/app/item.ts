@@ -7,5 +7,8 @@ export class Item
     score: number;
     genre: string;
     image: string;
-    user: string;
+    userIncluded: string;
+    userModified: string;
+    included: Date;
+    modified: Date;
 }

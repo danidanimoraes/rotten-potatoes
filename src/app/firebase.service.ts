@@ -12,6 +12,10 @@ export class FirebaseService {
 
   public createItem(title: string, description: string, score: number, genre: string, user: string, imageFile: File)
   {
+    const included: Date = new Date();
+    const modified: Date = included;
+    const userIncluded = user;
+    const userModified = user;
     if(imageFile)
     {
       const image: string = `series-and-movies/${title.toLowerCase().replace(/\s/g,'')}.${imageFile.type.split('/')[1]}`;
@@ -25,8 +29,11 @@ export class FirebaseService {
               description,
               score,
               genre,
-              user,
-              image
+              userIncluded,
+              userModified,
+              image,
+              included,
+              modified
             }
           )
       });
@@ -41,15 +48,19 @@ export class FirebaseService {
             description,
             score,
             genre,
-            user,
-            image 
+            userIncluded,
+            userModified,
+            image ,
+            included,
+            modified
           }
         )
     }
   }
 
-  public uploadItem(id: string, title: string, description: string, score: number, genre: string, user: string, imageFile: File)
+  public uploadItem(id: string, title: string, description: string, score: number, genre: string, userIncluded: string, userModified: string, imageFile: File)
   {
+    const modified: Date = new Date();
     if(imageFile)
     {
       const image: string = `series-and-movies/${title.toLowerCase().replace(/\s/g,'')}.${imageFile.type.split('/')[1]}`;
@@ -63,8 +74,10 @@ export class FirebaseService {
             description,
             score,
             genre,
-            user,
-            image
+            userIncluded,
+            userModified,
+            image,
+            modified
           });
       });      
     }
@@ -77,7 +90,9 @@ export class FirebaseService {
         description,
         score,
         genre,
-        user
+        userIncluded,
+        userModified,
+        modified
       });   
     }
   }
@@ -109,12 +124,5 @@ export class FirebaseService {
       .collection('items')
       .doc(`${id}`)
       .delete();
-  }
-
-  public updateItem(item)
-  {
-    this.db
-      .collection(`items`)
-      .doc(`${item}`)
   }
 }

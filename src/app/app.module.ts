@@ -4,7 +4,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule  } from '@angular/fire/storage';
 import { AngularFireAuthModule  } from '@angular/fire/auth';
-
+import { FormsModule } from '@angular/forms';
+import { OrderModule } from 'ngx-order-pipe';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './/app-routing.module';
@@ -36,7 +37,9 @@ import { HeaderComponent } from './header/header.component';
     AppRoutingModule,
     AngularFireStorageModule,
     CommonModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    FormsModule,
+    OrderModule
   ],
   providers: [FirebaseService, AuthenticationService],
   bootstrap: [AppComponent]
